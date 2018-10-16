@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_ui/account.dart';
+import 'package:youtube_ui/feed.dart';
 
 void main() => runApp(new MyApp());
 
@@ -30,19 +32,27 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
-    tabController = new TabController(vsync: this, length: 4);
+    this.tabController = new TabController(vsync: this, length: 4);
   }
 
   @override
   dispose() {
     super.dispose();
-    tabController.dispose();
+    this.tabController.dispose();
   }
 
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: _appBar(),
-      body: null,
+      body: new TabBarView(
+        controller: this.tabController,
+        children: <Widget>[
+          new HomeFeed(),
+          new TrendingFeed(),
+          new SubscriptionsFeed(),
+          new Account(),
+        ],
+      ),
     );
   }
 
@@ -52,8 +62,7 @@ class _MyHomePageState extends State<MyHomePage>
       backgroundColor: Colors.red,
       elevation: 0.0,
       title: new Text("Home",
-          style: new TextStyle(color: Colors.white, 
-          fontSize: 23.0)),
+          style: new TextStyle(color: Colors.white, fontSize: 23.0)),
       actions: <Widget>[
         new IconButton(
           icon: new Icon(
@@ -77,22 +86,14 @@ class _MyHomePageState extends State<MyHomePage>
         indicatorColor: Colors.white,
         tabs: [
           new Tab(
-            icon: new Icon(
-              Icons.home, 
-              size: 29.0, 
-              color: Colors.black54),
+            icon: new Icon(Icons.home, size: 29.0, color: Colors.black54),
           ),
           new Tab(
-            icon: new Icon(
-              Icons.whatshot, 
-              size: 29.0, 
-              color: Colors.black54),
+            icon: new Icon(Icons.whatshot, size: 29.0, color: Colors.black54),
           ),
           new Tab(
-            icon: new Icon(
-              Icons.subscriptions,
-              size: 28.0, 
-              color: Colors.black54),
+            icon: new Icon(Icons.subscriptions,
+                size: 28.0, color: Colors.black54),
           ),
           new Tab(
             icon: new Icon(
