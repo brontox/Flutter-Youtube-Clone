@@ -24,9 +24,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
-  @override
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+  
   TabController tabController;
 
   @override
