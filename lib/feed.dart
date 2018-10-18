@@ -8,7 +8,7 @@ import 'package:youtube_ui/model.dart';
 //The feeds will take in list of Cards into themselves and show those cards as feeds.
 //These card's data will come from either a dummy data or even from a youtube api.
 
-//-------------Home feed
+//-------------Home feed--------------------------------------
 class HomeFeed extends StatefulWidget {
   @override
   _HomeFeedState createState() => _HomeFeedState();
@@ -37,7 +37,7 @@ class _HomeFeedState extends State<HomeFeed> {
   }
 }
 
-//-------------Trending feed
+//-------------Trending feed---------------------------------------------
 class TrendingFeed extends StatefulWidget {
   @override
   _TrendingFeedState createState() => _TrendingFeedState();
@@ -47,12 +47,26 @@ class _TrendingFeedState extends State<TrendingFeed> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new Text("This is home from trending"),
+      child: videos == null
+          ? new CircularProgressIndicator()
+          : new ListView.builder(
+              itemCount: videos.length,
+              itemBuilder: (context, index) {
+                return new Column(children: [
+                  new YoutubeCard(
+                    video: videos[index],
+                  ),
+                  new Divider(
+                    height: 0.0,
+                    color: Colors.grey,
+                  ),
+                ]);
+              }),
     );
   }
 }
 
-//--------------Subs feed
+//--------------Subs feed--------------------------------------------------
 class SubscriptionsFeed extends StatefulWidget {
   @override
   _SubscriptionsFeedState createState() => _SubscriptionsFeedState();
@@ -62,12 +76,26 @@ class _SubscriptionsFeedState extends State<SubscriptionsFeed> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new Text("This is home from subscription"),
+      child: videos == null
+          ? new CircularProgressIndicator()
+          : new ListView.builder(
+              itemCount: videos.length,
+              itemBuilder: (context, index) {
+                return new Column(children: [
+                  new YoutubeCard(
+                    video: videos[index],
+                  ),
+                  new Divider(
+                    height: 0.0,
+                    color: Colors.grey,
+                  ),
+                ]);
+              }),
     );
   }
 }
 
-//----------------Cards
+//----------------Cards------------------------------
 class YoutubeCard extends StatefulWidget {
   final YoutubeVideo video;
 
@@ -78,7 +106,6 @@ class YoutubeCard extends StatefulWidget {
 }
 
 class _YoutubeCardState extends State<YoutubeCard> {
-  
   String _dateFormater() {
     dynamic date;
     if (DateTime.now().year - widget.video.date.year != 0) {
@@ -107,7 +134,7 @@ class _YoutubeCardState extends State<YoutubeCard> {
     int views = widget.video.views;
     String viewStr = views.toString();
     int length = viewStr.length;
-    
+
     String sign;
 
     //Below 1000 will return the view itself without sign

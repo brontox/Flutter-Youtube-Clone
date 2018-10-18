@@ -24,8 +24,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
-  
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   TabController tabController;
 
   @override
@@ -48,7 +48,6 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         children: <Widget>[
           new HomeFeed(),
           new TrendingFeed(),
-          new SubscriptionsFeed(),
           new Account(),
         ],
       ),
@@ -83,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       bottom: new TabBar(
         controller: this.tabController,
         indicatorColor: Colors.white,
+        indicatorWeight: 4.0,
         tabs: [
           new Tab(
             icon: new Icon(Icons.home, size: 29.0, color: Colors.black54),
@@ -90,10 +90,10 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           new Tab(
             icon: new Icon(Icons.whatshot, size: 29.0, color: Colors.black54),
           ),
-          new Tab(
-            icon: new Icon(Icons.subscriptions,
-                size: 28.0, color: Colors.black54),
-          ),
+          // new Tab(
+          //   icon: new Icon(Icons.subscriptions,
+          //       size: 28.0, color: Colors.black54),
+          // ),
           new Tab(
             icon: new Icon(
               Icons.person,
