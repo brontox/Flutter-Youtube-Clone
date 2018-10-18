@@ -1,5 +1,7 @@
 
 
+import 'package:flutter/foundation.dart';
+
 class YoutubeVideo {
   final String thumbnail, avatar, title, channel;
   final DateTime date;
@@ -7,12 +9,13 @@ class YoutubeVideo {
 
   YoutubeVideo(
       {
-        this.thumbnail,
-      this.avatar,
-      this.channel,
-      this.title,
-      this.views,
-      this.date});
+      @required this.thumbnail,
+      @required this.avatar,
+      @required this.channel,
+      @required this.title,
+      @required this.views,
+      this.date
+    });
 }
 
 

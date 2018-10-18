@@ -18,14 +18,14 @@ class _HomeFeedState extends State<HomeFeed> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: videos == null
+      child: videosHome == null
           ? new CircularProgressIndicator()
           : new ListView.builder(
-              itemCount: videos.length,
+              itemCount: videosHome.length,
               itemBuilder: (context, index) {
                 return new Column(children: [
                   new YoutubeCard(
-                    video: videos[index],
+                    video: videosHome[index],
                   ),
                   new Divider(
                     height: 0.0,
@@ -47,14 +47,14 @@ class _TrendingFeedState extends State<TrendingFeed> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: videos == null
+      child: videosTrending == null
           ? new CircularProgressIndicator()
           : new ListView.builder(
-              itemCount: videos.length,
+              itemCount: videosTrending.length,
               itemBuilder: (context, index) {
                 return new Column(children: [
                   new YoutubeCard(
-                    video: videos[index],
+                    video: videosTrending[index],
                   ),
                   new Divider(
                     height: 0.0,
@@ -76,14 +76,14 @@ class _SubscriptionsFeedState extends State<SubscriptionsFeed> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: videos == null
+      child: videosHome == null
           ? new CircularProgressIndicator()
           : new ListView.builder(
-              itemCount: videos.length,
+              itemCount: videosHome.length,
               itemBuilder: (context, index) {
                 return new Column(children: [
                   new YoutubeCard(
-                    video: videos[index],
+                    video: videosHome[index],
                   ),
                   new Divider(
                     height: 0.0,
@@ -108,26 +108,28 @@ class YoutubeCard extends StatefulWidget {
 class _YoutubeCardState extends State<YoutubeCard> {
   String _dateFormater() {
     dynamic date;
-    if (DateTime.now().year - widget.video.date.year != 0) {
-      date = DateTime.now().year - widget.video.date.year;
-      date = "$date years ago";
-    } else if (DateTime.now().month - widget.video.date.month != 0) {
-      date = (DateTime.now().month - widget.video.date.month).abs();
-      date = "$date monthes ago";
-    } else if (DateTime.now().day - widget.video.date.day != 0) {
-      date = DateTime.now().day - widget.video.date.day;
-      date = "$date days ago";
-    } else if (DateTime.now().hour - widget.video.date.hour != 0) {
-      date = DateTime.now().hour - widget.video.date.hour;
-      date = "$date hours ago";
-    } else if (DateTime.now().minute - widget.video.date.minute != 0) {
-      date = DateTime.now().minute - widget.video.date.minute;
-      date = "$date minutes ago";
-    } else {
-      date = DateTime.now().second - widget.video.date.second;
-      date = "$date seconds ago";
+    if (widget.video.date != null) {
+      if (DateTime.now().year - widget.video.date.year != 0) {
+        date = DateTime.now().year - widget.video.date.year;
+        date = "$date years ago";
+      } else if (DateTime.now().month - widget.video.date.month != 0) {
+        date = (DateTime.now().month - widget.video.date.month).abs();
+        date = "$date monthes ago";
+      } else if (DateTime.now().day - widget.video.date.day != 0) {
+        date = DateTime.now().day - widget.video.date.day;
+        date = "$date days ago";
+      } else if (DateTime.now().hour - widget.video.date.hour != 0) {
+        date = DateTime.now().hour - widget.video.date.hour;
+        date = "$date hours ago";
+      } else if (DateTime.now().minute - widget.video.date.minute != 0) {
+        date = DateTime.now().minute - widget.video.date.minute;
+        date = "$date minutes ago";
+      } else {
+        date = DateTime.now().second - widget.video.date.second;
+        date = "$date seconds ago";
+      }
     }
-    return date;
+    return date == null ? "" : " . "+date;
   }
 
   String _viewRounder() {
@@ -211,7 +213,7 @@ class _YoutubeCardState extends State<YoutubeCard> {
                           new Padding(
                             padding: EdgeInsets.only(left: pad),
                             child: new Text(
-                              "$channel . $views . $date",
+                              "$channel . $views $date",
                               style: new TextStyle(
                                   color: Colors.grey[700], fontSize: 16.0),
                             ),
